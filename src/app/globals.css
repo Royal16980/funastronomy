@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0a0f1c;
+  --fg: #e6edf7;
+}
+
+html, body {
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.prose img {
+  border-radius: 0.75rem;
+}
+a { color: #4bb3fd; }
+a:hover { text-decoration: underline; }
