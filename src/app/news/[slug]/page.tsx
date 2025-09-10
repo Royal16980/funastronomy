@@ -1,13 +1,15 @@
 import { allPosts } from 'contentlayer/generated';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
-import { MDXContent } from '@contentlayer/utils';
+import { useMDXComponent } from 'next-contentlayer/hooks';
 
 export const revalidate = 60;
 
 export default function ArticlePage({ params }: { params: { slug: string } }) {
   const post = allPosts.find(p => p.slug === params.slug);
   if (!post) return notFound();
+
+  const MDXComponent = useMDXComponent(post.body.code);
 
   return (
     <article className="prose prose-invert max-w-3xl">
@@ -19,7 +21,7 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
       </figure>
       <h1>{post.title}</h1>
       <p className="text-white/60 text-sm">{new Date(post.date).toLocaleDateString()}</p>
-      <MDXContent code={post.body.code} />
+      <MDXComponent />
     </article>
   );
 }
